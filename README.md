@@ -114,7 +114,8 @@ If you're an agent developer, you can use the SDK to implement the protocol. You
 - 🚧 [beebot](https://github.com/AutoPackAI/beebot)
   - Might require more features. See
     [issue here](https://github.com/AI-Engineer-Foundation/agent-protocol/issues/9).
-
+- ✅ [Nevermined](https://docs.nevermined.io/docs/protocol/query-protocol)
+  
 ## 📃 High-level future roadmap
 
 - Agent-to-agent communication
