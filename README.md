@@ -132,3 +132,7 @@ If you're an agent developer, you can use the SDK to implement the protocol. You
   `agent-protocol` channel
 - Join [e2b Discord](https://discord.gg/U7KEcGErtQ) and their dedicated
   `agent-protocol` channel
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Div99/agent-protocol&type=Date)](https://star-history.com/#Div99/agent-protocol&Date)
