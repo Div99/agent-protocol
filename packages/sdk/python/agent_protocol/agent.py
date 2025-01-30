@@ -51,7 +51,9 @@ async def create_agent_task(body: TaskRequestBody | None = None) -> Task:
 
 
 @base_router.get("/ap/v1/agent/tasks", response_model=TaskListResponse, tags=["agent"])
-async def list_agent_tasks_ids(page_size: int = 10, current_page: int = 1) -> List[str]:
+async def list_agent_tasks_ids(
+    page_size: int = 10, current_page: int = 1
+) -> TaskListResponse:
     """
     List all tasks that have been created for the agent.
     """
@@ -84,7 +86,7 @@ async def get_agent_task(task_id: str) -> Task:
 )
 async def list_agent_task_steps(
     task_id: str, page_size: int = 10, current_page: int = 1
-) -> List[str]:
+) -> TaskStepsListResponse:
     """
     List all steps for the specified task.
     """
