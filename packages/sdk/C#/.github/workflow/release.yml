@@ -1,0 +1,81 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: "Release type (patch, minor, major)"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_PAT }} # Personal access token with repo permissions
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.10.2
+        with:
+          versionSpec: "5.x"
+
+      - name: Get current version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.10.2
+        with:
+          useConfigFile: true
+
+      - name: Display current version
+        run: echo "Current version is ${{ steps.gitversion.outputs.semVer }}"
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Determine new version
+        id: newversion
+        run: |
+          CURRENT_VERSION=${{ steps.gitversion.outputs.majorMinorPatch }}
+          RELEASE_TYPE=${{ github.event.inputs.releaseType }}
+
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+
+          if [ "$RELEASE_TYPE" == "major" ]; then
+            NEW_VERSION="$((MAJOR + 1)).0.0"
+          elif [ "$RELEASE_TYPE" == "minor" ]; then
+            NEW_VERSION="$MAJOR.$((MINOR + 1)).0"
+          else # patch
+            NEW_VERSION="$MAJOR.$MINOR.$((PATCH + 1))"
+          fi
+
+          echo "newVersion=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version will be $NEW_VERSION"
+
+      - name: Create commit with version bump
+        run: |
+          echo "+semver: ${{ github.event.inputs.releaseType }}" > version-bump.txt
+          git add version-bump.txt
+          git commit -m "+semver: ${{ github.event.inputs.releaseType }}"
+          git push origin HEAD:main
+
+      - name: Create tag
+        run: |
+          git tag -a v${{ steps.newversion.outputs.newVersion }} -m "Release v${{ steps.newversion.outputs.newVersion }}"
+          git push origin v${{ steps.newversion.outputs.newVersion }}
+
+      # The actual release creation will be handled by the main workflow triggered by the tag push
