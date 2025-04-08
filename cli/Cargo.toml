@@ -1,0 +1,20 @@
+[package]
+name = "apc"
+version = "1.0.0"
+authors = ["AI Engineer Foundation <aiengfoundation@gmail.com>"]
+description = "Agent Protocol CLI for communication with an agent."
+license = "MIT"
+edition = "2018"
+
+[dependencies]
+serde = "^1.0"
+serde_derive = "^1.0"
+serde_with = "^2.0"
+serde_json = "^1.0"
+url = "^2.2"
+uuid = { version = "^1.0", features = ["serde", "v4"] }
+clap = { version = "4.4.6", features = ["derive"] }
+tokio = { version = "1.33.0", features = ["full"] }
+[dependencies.reqwest]
+version = "^0.11"
+features = ["json", "multipart"]
