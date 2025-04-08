@@ -14,6 +14,7 @@
   
 </p>
 
+Maintained by **<a href="https://agi.tech" target="_blank">AGI, Inc.</a>**
 ## 📚 Docs
 
 **You can find more info in the [docs](https://agentprotocol.ai/).**
