@@ -2,12 +2,16 @@
   <img height="420px" src="./assets/cover.png" alt="agent protocol">
 </h1>
 <p align="center">
-  <a href="https://discord.gg/bJnNh666C3" target="_blank">
+<!--   <a href="https://discord.gg/bJnNh666C3" target="_blank">
     <img src="https://img.shields.io/static/v1?label=Join&message=%20discord!&color=mediumslateblue">
+  </a> -->
+  <a href="https://www.linkedin.com/company/the-agi-company" target="_blank">
+    <img src="https://img.shields.io/badge/%40-Linkedin-blue">
   </a>
-  <a href="https://twitter.com/e2b_dev" target="_blank">
-    <img src="https://img.shields.io/twitter/follow/e2b.svg?logo=twitter">
+  <a href="https://x.com/the_agi_company" target="_blank">
+    <img src="https://img.shields.io/twitter/follow/the_agi_company.svg?logo=twitter">
   </a>
+  
 </p>
 
 ## 📚 Docs
