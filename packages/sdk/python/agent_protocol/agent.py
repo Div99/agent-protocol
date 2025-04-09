@@ -131,6 +131,7 @@ async def execute_agent_task_step(
     step = await _step_handler(step)
 
     step.status = Status.completed
+    await Agent.db.update_step(task_id, step)
     return step
 
 
